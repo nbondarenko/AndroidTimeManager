@@ -32,9 +32,10 @@ class TicketsAdapter(val context: Context, val ticketsList: ArrayList<Ticket>) :
         }
 
         vh.due.text = ticketsList[position].due
+        vh.labels.text = ticketsList[position].labels
         vh.title.text = ticketsList[position].title
-        vh.desc.text = ticketsList[position].desc.toString()
-        vh.closed.text = ticketsList[position].closed.toString()
+        vh.desc.text = ticketsList[position].desc
+        vh.closed.text = if (ticketsList[position].closed == true) "The ticket is closed" else "The ticket is opened"
 
         return view
     }
@@ -56,5 +57,6 @@ class TicketsAdapter(val context: Context, val ticketsList: ArrayList<Ticket>) :
         val title: TextView = view?.findViewById<TextView>(R.id.titleText) as TextView
         val desc: TextView = view?.findViewById<TextView>(R.id.descText) as TextView
         val closed: TextView = view?.findViewById<TextView>(R.id.closedText) as TextView
+        val labels: TextView = view?.findViewById<TextView>(R.id.labelsText) as TextView
     }
 }

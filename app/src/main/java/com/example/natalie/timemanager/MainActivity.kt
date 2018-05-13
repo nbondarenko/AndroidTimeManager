@@ -18,9 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         listTickets = LoadDataTask().execute().get()
-
-        listTickets.add(Ticket("1", "Lab1", "CV", "aaa", "desc1", true, ""))
-        listTickets.add(Ticket("2", "Lab2", "CV", "aaa", "desc1", true, ""))
+        Log.d("ticket id", listTickets[0].id)
 
         var ticketsAdapter = TicketsAdapter(this, listTickets)
         lvTickets.adapter = ticketsAdapter
