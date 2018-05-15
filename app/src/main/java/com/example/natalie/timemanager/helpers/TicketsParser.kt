@@ -13,8 +13,7 @@ import java.time.format.FormatStyle
  * Created by natalie on 5/13/18.
  */
 class TicketsParser(jsonString: String) {
-    private var jsonData = JSONObject(jsonString)
-    private var jsonCards = jsonData.getJSONArray("cards")
+    private var jsonCards = JSONObject(jsonString).getJSONArray("cards")
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun parseTickets(): ArrayList<Ticket> {
@@ -42,7 +41,7 @@ class TicketsParser(jsonString: String) {
             closed = jsonTicketCard.getBoolean("closed")
             labels = getLabels(jsonTicketCard)
 
-            ticket = Ticket(id, title, due, url, desc, closed, labels)
+            ticket = Ticket(id, title, desc, url, due, closed, labels)
 
             listTickets.add(ticket)
         }
