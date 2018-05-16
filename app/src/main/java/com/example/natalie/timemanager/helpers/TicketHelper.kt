@@ -8,7 +8,7 @@ import org.jetbrains.anko.db.*
 /**
  * Created by natalie on 5/13/18.
  */
-class TicketCreator(var db: MyDatabaseOpenHelper) {
+class TicketHelper(var db: MyDatabaseOpenHelper) {
     fun showLast() : Ticket {
         val t = db.use {
             select("tickets")
@@ -17,6 +17,28 @@ class TicketCreator(var db: MyDatabaseOpenHelper) {
                     )
         }
         return t[0]
+    }
+
+    fun getById(ticketId: String) : Ticket {
+        val t = db.use {
+            select("tickets")
+                    .whereArgs("id = {id}", "id" to ticketId)
+                    .limit(1)
+                    .parseList(classParser<Ticket>()
+                    )
+        }
+        return t[0]
+    }
+
+    fun writeTimeSpent(id: String, time: Long) {
+        var ticket = getById(id)
+        db.use {
+            update("tickets",
+                    "timeSpent" to ticket.timeSpent + time.toInt())
+                    .whereArgs("id = {id}", "id" to id)
+                    .exec()
+        }
+        Log.d("After time spent update", time.toString())
     }
 
     fun createOrUpdate(id: String, ticket: Ticket): Ticket {

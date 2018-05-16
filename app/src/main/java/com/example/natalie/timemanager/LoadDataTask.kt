@@ -1,12 +1,11 @@
 package com.example.natalie.timemanager
 
-import android.content.Context
 import android.os.AsyncTask
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.Log
 import com.example.natalie.timemanager.helpers.MyDatabaseOpenHelper
-import com.example.natalie.timemanager.helpers.TicketCreator
+import com.example.natalie.timemanager.helpers.TicketHelper
 import com.example.natalie.timemanager.helpers.TicketsParser
 import java.net.URL
 
@@ -21,7 +20,7 @@ class LoadDataTask(val database: MyDatabaseOpenHelper) : AsyncTask<String, Strin
         try {
             val result = URL("https://api.trello.com/1/boards/bayp41u3/?cards=all&key=2305ecf8603d372cc910909bdfc69f53&token=8d66af343986ceaf9d0cba5e291d271fd906934c5d61d245c34c5d9a7ab7a25c").readText()
             val parser = TicketsParser(result)
-            val ticketCreator = TicketCreator(database)
+            val ticketCreator = TicketHelper(database)
             try {
                 parser.parseTickets().forEach {
                     Log.d("ticket id", it.id)

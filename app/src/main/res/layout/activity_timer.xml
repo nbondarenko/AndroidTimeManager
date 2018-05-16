@@ -6,4 +6,62 @@
     android:layout_height="match_parent"
     tools:context="com.example.natalie.timemanager.TimerActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Chronometer
+            android:id="@+id/chronometr"
+            android:layout_width="match_parent"
+            android:layout_height="199dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="24dp"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="179dp"
+            tools:layout_editor_absoluteY="138dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/startTimeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start  time"
+                tools:layout_editor_absoluteX="89dp"
+                tools:layout_editor_absoluteY="335dp"
+                android:onClick="startTimer" />
+
+            <Button
+                android:id="@+id/stopTimeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stop time"
+                tools:layout_editor_absoluteX="206dp"
+                tools:layout_editor_absoluteY="335dp"
+                android:onClick="stopTimer"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/writeTimeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to spent time"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="409dp"
+            android:onClick="writeTime"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

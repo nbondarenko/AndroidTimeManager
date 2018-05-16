@@ -1,12 +1,12 @@
 package com.example.natalie.timemanager
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.Toast
 import com.example.natalie.timemanager.helpers.MyDatabaseOpenHelper
-import com.example.natalie.timemanager.helpers.TicketCreator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.db.*
 
@@ -33,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         lvTickets.adapter = ticketsAdapter
         lvTickets.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             Toast.makeText(this, "Click on " + listTickets[position].title, Toast.LENGTH_SHORT).show()
+
+            // Create an Intent to start the second activity
+            val timerIntent = Intent(this, TimerActivity::class.java)
+            timerIntent.putExtra(TimerActivity.TICKET_ID, listTickets[position].id.toString())
+
+            // Start the new activity.
+            startActivity(timerIntent)
         }
     }
 }

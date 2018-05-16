@@ -1,6 +1,7 @@
 package com.example.natalie.timemanager
 
 import android.content.Context
+import android.support.annotation.IntegerRes
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class TicketsAdapter(val context: Context, val ticketsList: ArrayList<Ticket>) :
         vh.labels.text = ticketsList[position].labels
         vh.title.text = ticketsList[position].title
         vh.desc.text = ticketsList[position].desc
+        vh.timeSpent.text = formatTimeSpent(ticketsList[position].timeSpent)
         vh.closed.text = if (ticketsList[position].closed == true) "The ticket is closed" else "The ticket is opened"
 
         return view
@@ -52,11 +54,19 @@ class TicketsAdapter(val context: Context, val ticketsList: ArrayList<Ticket>) :
         return ticketsList.size
     }
 
+    fun formatTimeSpent(timeSpent: Int): String {
+        var timeInHours = timeSpent / 60 / 60
+        var timeInMinutes = (timeSpent - (timeInHours * 60 * 60)) / 60
+        var timeInSeconds = (timeSpent - timeInMinutes * 60)
+        return "Total time spent: $timeInHours hours $timeInMinutes minutes and $timeInSeconds seconds"
+    }
+
     private class ViewHolder(view: View?) {
         val due: TextView = view?.findViewById<TextView>(R.id.dueText) as TextView
         val title: TextView = view?.findViewById<TextView>(R.id.titleText) as TextView
         val desc: TextView = view?.findViewById<TextView>(R.id.descText) as TextView
         val closed: TextView = view?.findViewById<TextView>(R.id.closedText) as TextView
         val labels: TextView = view?.findViewById<TextView>(R.id.labelsText) as TextView
+        val timeSpent: TextView = view?.findViewById<TextView>(R.id.timeSpentText) as TextView
     }
 }
