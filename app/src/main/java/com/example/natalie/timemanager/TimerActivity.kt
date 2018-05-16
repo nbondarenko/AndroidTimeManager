@@ -35,8 +35,10 @@ class TimerActivity : AppCompatActivity() {
         database = MyDatabaseOpenHelper.getInstance(this)
         ticketHelper = TicketHelper(database)
         val ticket = ticketHelper.getById(ticketId)
-        Log.d("Time before dvizucha: ", ticket.timeSpent.toString())
+        Log.d("Time before dvizukha: ", ticket.timeSpent.toString())
+
         setContentView(R.layout.activity_timer)
+        taskNameText.text = ticket.title
     }
 
     private fun showElapsedTime() {
@@ -69,7 +71,7 @@ class TimerActivity : AppCompatActivity() {
         Log.d("durationInSeconds: ", durationInSeconds.toString())
         ticketHelper.writeTimeSpent(ticketId, durationInSeconds)
         val ticket = ticketHelper.getById(ticketId)
-        Log.d("Time after dvizucha: ", ticket.timeSpent.toString())
+        Log.d("Time after dvizukha: ", ticket.timeSpent.toString())
 
         val mainScreenIntent = Intent(this, MainActivity::class.java)
 
